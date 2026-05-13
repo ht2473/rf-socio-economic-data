@@ -1,9 +1,9 @@
 # 🇷🇺 Социально-экономические показатели регионов России
 
-[![CI: validate](https://github.com/ht2473/russia-regions-dataset/actions/workflows/validate.yml/badge.svg)](https://github.com/ht2473/russia-regions-dataset/actions/workflows/validate.yml)
+[![CI: validate](https://github.com/ht2473/rf-socio-economic-data/actions/workflows/validate.yml/badge.svg)](https://github.com/ht2473/rf-socio-economic-data/actions/workflows/validate.yml)
 [![License: CC BY](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/Code%20License-MIT-green.svg)](LICENSE)
-[![Data source: Росстат](https://img.shields.io/badge/Источник-Росстат-blue)](https://rosstat.gov.ru/folder/210)
+[![Data source: Росстат](https://rosstat.gov.ru/folder/210/document/13204/Источник-Росстат-blue)](https://rosstat.gov.ru/folder/210)
 [![Dataset version](https://img.shields.io/badge/версия-3.0%20(2026--03--13)-orange)](CHANGELOG.md)
 
 Готовый к анализу датасет из **19 сборников Росстата** о социально-экономическом развитии регионов России.  
