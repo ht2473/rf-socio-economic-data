@@ -1,0 +1,52 @@
+# ── Python ────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── IDE ───────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Jupyter ───────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Heavy data files — NOT committed to git ───────────────────────────────
+# Raw source files (download from https://tochno.st/datasets/regions_collection)
+data/raw/
+
+# Full processed dataset (regenerate with: make processed)
+data/processed/regions_full.parquet
+data/processed/regions_full.csv.gz
+
+# ── Lightweight outputs — DO commit ───────────────────────────────────────
+!data/processed/catalogue.parquet
+!data/processed/catalogue.csv
+!data/processed/objects.parquet
+!data/processed/objects.csv
+!data/processed/sections.parquet
+!data/processed/sections.csv
+!data/samples/
+# Full sample CSV is >512KB so GitHub won't render it as table
+# The _preview.csv variant (truncated text cols) is under 512KB and renders fine
+data/samples/regions_sample_*[0-9].csv
+!data/samples/regions_sample_*_preview.csv
+!docs/data_profile.md
+
+# ── Misc ──────────────────────────────────────────────────────────────────
+*.log
+tmp/
+.cache/

@@ -1,0 +1,50 @@
+name: Validate dataset
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "scripts/**"
+      - "data/samples/**"
+      - "requirements.txt"
+  pull_request:
+    branches: [main, master]
+  schedule:
+    # Run weekly on Monday 08:00 UTC to catch regressions
+    - cron: "0 8 * * 1"
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  validate:
+    name: Schema & quality checks (sample)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate sample (schema, value_status, year range, nulls)
+        run: python scripts/02_validate.py --sample-only --fail-on-warn
+
+      - name: Smoke-test explore CLI
+        run: |
+          python scripts/03_explore.py info
+          python scripts/03_explore.py search зарплата
+
+      - name: Upload profile report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-profile
+          path: docs/data_profile.md
+          retention-days: 30
