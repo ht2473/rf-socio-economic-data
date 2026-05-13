@@ -7,6 +7,29 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-05-14
+
+### Fixed
+- `scripts/03_explore.py` — critical index-alignment bug in `example_grp`,
+  `example_wages`, `example_population`: boolean masks were built from the
+  unfiltered `df` and applied to `_valid(df)`, causing `IndexError` or
+  silently wrong results on certain data slices
+- `scripts/02_validate.py` — `data_profile.md` reported
+  `regions_full.parquet` as source even when run in `--sample-only` mode;
+  source field now reflects the actual file used
+- `README.md` — corrected `git clone` URL (was `russia-regions-dataset`,
+  is `rf-socio-economic-data`)
+- `LICENSE` — added author name to copyright line
+- `.github/workflows/validate.yml` — added `cache-dependency-path` for
+  reliable pip caching; added smoke-test step for `01_process.py --help`
+
+### Changed
+- `Makefile` — added `INPUT ?=` variable; `make processed INPUT=path/to/file.parquet`
+  now works as documented in CONTRIBUTING
+- `requirements.txt` — runtime only (`pandas`, `pyarrow`); Jupyter and dev
+  tools moved to new `requirements-dev.txt`
+- `CONTRIBUTING.md` — added development setup section with `ruff` instructions
+
 ## [1.0.0] — 2026-03-13
 
 ### Added

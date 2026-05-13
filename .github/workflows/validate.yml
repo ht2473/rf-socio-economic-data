@@ -29,6 +29,7 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
+          cache-dependency-path: requirements.txt
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -42,6 +43,9 @@ jobs:
         run: |
           python scripts/03_explore.py info
           python scripts/03_explore.py search зарплата
+
+      - name: Smoke-test ETL help
+        run: python scripts/01_process.py --help
 
       - name: Upload profile report
         if: always()

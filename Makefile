@@ -53,6 +53,7 @@ install:
 
 SAMPLE_N     ?= 1000
 COMPRESSION  ?= zstd
+INPUT        ?=
 
 .PHONY: processed
 processed: $(PROCESSED)
@@ -60,6 +61,7 @@ processed: $(PROCESSED)
 $(PROCESSED): $(shell find $(RAW_DIR) -name "*.parquet" 2>/dev/null | head -1)
 	@echo "▶ Running ETL pipeline ..."
 	$(PYTHON) scripts/01_process.py \
+		$(if $(INPUT),--input $(INPUT),) \
 		--sample-n $(SAMPLE_N) \
 		--compression $(COMPRESSION)
 	@echo "✅ ETL complete"

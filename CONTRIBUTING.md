@@ -17,7 +17,7 @@ wget -P data/raw/ https://tochno.st/.../<new_file>.parquet
 
 ```bash
 make processed INPUT=data/raw/<new_file>.parquet
-# or with explicit path:
+# or with explicit path via script directly:
 python scripts/01_process.py --input data/raw/<new_file>.parquet
 ```
 
@@ -62,8 +62,16 @@ git push
 
 - **Branch names:** `feat/...`, `fix/...`, `data/...`
 - **Commit messages:** follow [Conventional Commits](https://www.conventionalcommits.org/)
-- **Python style:** PEP 8; type hints on all public functions
+- **Python style:** PEP 8; type hints on all public functions; checked with `ruff`
 - **Scripts:** always runnable from the repo root; support `--help`
+
+## Development setup
+
+```bash
+pip install -r requirements-dev.txt   # includes jupyter + ruff
+ruff check scripts/                   # lint
+ruff check --fix scripts/             # auto-fix
+```
 
 ## Reporting issues
 

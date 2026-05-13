@@ -1,0 +1,9 @@
+# Development dependencies — not needed for CI or basic usage
+-r requirements.txt
+
+# Notebook
+jupyter>=1.0
+nbformat>=5.9
+
+# Code quality
+ruff>=0.4

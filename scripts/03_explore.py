@@ -76,9 +76,10 @@ def _header(title: str) -> None:
 
 def example_grp(df: pd.DataFrame) -> None:
     _header("Example 1: Gross Regional Product — top 10 regions (latest year)")
-    grp = _valid(df)[
-        df["indicator_name"].str.contains("Валовой региональный продукт", na=False) &
-        (df["object_level"] == "Регион")
+    clean = _valid(df)
+    grp = clean[
+        clean["indicator_name"].str.contains("Валовой региональный продукт", na=False) &
+        (clean["object_level"] == "Регион")
     ]
     if grp.empty:
         print("  No GRP data available in this slice.")
@@ -97,10 +98,11 @@ def example_grp(df: pd.DataFrame) -> None:
 
 def example_wages(df: pd.DataFrame) -> None:
     _header("Example 2: Average monthly wage by Federal District (2015→latest)")
-    wages = _valid(df)[
-        df["indicator_name"].str.contains("Среднемесячная", na=False) &
-        df["indicator_name"].str.contains("заработная плата", na=False) &
-        (df["object_level"] == "Федеральный округ")
+    clean = _valid(df)
+    wages = clean[
+        clean["indicator_name"].str.contains("Среднемесячная", na=False) &
+        clean["indicator_name"].str.contains("заработная плата", na=False) &
+        (clean["object_level"] == "Федеральный округ")
     ]
     if wages.empty:
         print("  No wage data for federal districts in this slice.")
@@ -117,9 +119,10 @@ def example_wages(df: pd.DataFrame) -> None:
 
 def example_population(df: pd.DataFrame) -> None:
     _header("Example 3: Population of Russian regions, latest available year")
-    pop = _valid(df)[
-        df["indicator_name"].str.contains("Численность населения", na=False) &
-        (df["object_level"] == "Регион")
+    clean = _valid(df)
+    pop = clean[
+        clean["indicator_name"].str.contains("Численность населения", na=False) &
+        (clean["object_level"] == "Регион")
     ]
     if pop.empty:
         print("  No population data in this slice.")

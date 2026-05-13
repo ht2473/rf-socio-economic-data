@@ -275,12 +275,17 @@ def write_md_report(
 ) -> None:
     mode_note = " *(sample mode)*" if sample_mode else ""
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    source_path = (
+        "data/samples/regions_sample_*.parquet"
+        if sample_mode
+        else "data/processed/regions_full.parquet"
+    )
 
     lines = [
         "# Data Profile Report",
         "",
         f"Generated: {generated}{mode_note}  ",
-        f"Source: `data/processed/regions_full.parquet`",
+        f"Source: `{source_path}`",
         "",
         "## Summary",
         "",

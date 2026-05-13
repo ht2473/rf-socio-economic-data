@@ -87,8 +87,8 @@ python scripts/01_process.py --input data/raw/<filename>.parquet
 ### Установка
 
 ```bash
-git clone https://github.com/ht2473/russia-regions-dataset.git
-cd russia-regions-dataset
+git clone https://github.com/ht2473/rf-socio-economic-data.git
+cd rf-socio-economic-data
 make install       # pip install -r requirements.txt
 ```
 
