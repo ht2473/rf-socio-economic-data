@@ -34,7 +34,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Validate sample (schema, value_status, year range, nulls)
-        run: python scripts/02_validate.py --sample-only 
+        run: >
+          python scripts/02_validate.py --sample-only --fail-on-warn
+          --ignore-warn "Duplicate primary key"
 
       - name: Smoke-test explore CLI
         run: |

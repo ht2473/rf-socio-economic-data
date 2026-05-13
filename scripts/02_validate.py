@@ -85,6 +85,14 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Exit with code 1 if any warnings are found (strict CI mode)",
     )
+    p.add_argument(
+        "--ignore-warn",
+        nargs="*",
+        default=[],
+        metavar="CHECK_NAME",
+        help="Warn-level check names to exclude when --fail-on-warn is set "
+             "(e.g. 'Duplicate primary key'). Useful for known/expected warnings.",
+    )
     return p.parse_args()
 
 
@@ -361,11 +369,15 @@ def main() -> None:
     write_md_report(p, checks, section_df, args.out, sample_mode=args.sample_only)
 
     n_fail = sum(1 for c in checks if c.status == "fail")
-    n_warn = sum(1 for c in checks if c.status == "warn")
-    log.info("=== Done in %.1fs | %d ok  %d warn  %d fail ===",
+    ignored = set(args.ignore_warn or [])
+    n_warn = sum(1 for c in checks if c.status == "warn" and c.name not in ignored)
+    n_warn_ignored = sum(1 for c in checks if c.status == "warn" and c.name in ignored)
+    log.info("=== Done in %.1fs | %d ok  %d warn  %d ignored  %d fail ===",
              time.perf_counter() - t0,
              sum(1 for c in checks if c.status == "ok"),
-             n_warn, n_fail)
+             n_warn, n_warn_ignored, n_fail)
+    if n_warn_ignored:
+        log.info("  Ignored warnings (--ignore-warn): %s", ", ".join(sorted(ignored)))
 
     if n_fail or (args.fail_on_warn and n_warn):
         sys.exit(1)
